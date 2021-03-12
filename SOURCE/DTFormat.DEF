@@ -1,0 +1,67 @@
+(**************************************************************************)
+(*                                                                        *)
+(*  Support module for some of my applications                            *)
+(*  Copyright (C) 2020   Peter Moylan                                     *)
+(*                                                                        *)
+(*  This program is free software: you can redistribute it and/or modify  *)
+(*  it under the terms of the GNU General Public License as published by  *)
+(*  the Free Software Foundation, either version 3 of the License, or     *)
+(*  (at your option) any later version.                                   *)
+(*                                                                        *)
+(*  This program is distributed in the hope that it will be useful,       *)
+(*  but WITHOUT ANY WARRANTY; without even the implied warranty of        *)
+(*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *)
+(*  GNU General Public License for more details.                          *)
+(*                                                                        *)
+(*  You should have received a copy of the GNU General Public License     *)
+(*  along with this program.  If not, see <http://www.gnu.org/licenses/>. *)
+(*                                                                        *)
+(*  To contact author:   http://www.pmoylan.org   peter@pmoylan.org       *)
+(*                                                                        *)
+(**************************************************************************)
+
+DEFINITION MODULE DTFormat;
+
+        (********************************************************)
+        (*                                                      *)
+        (*        Conversion of date and time to string         *)
+        (*                                                      *)
+        (*  Programmer:         P. Moylan                       *)
+        (*  Started:            17 August 2020                  *)
+        (*  Last edited:        31 August 2020                  *)
+        (*  Status:             OK                              *)
+        (*                                                      *)
+        (********************************************************)
+
+
+IMPORT OS2;
+
+TYPE DateTime = OS2.DATETIME;
+
+PROCEDURE FormatDateTime (Time: DateTime;  format: ARRAY OF CHAR;
+                                    VAR (*OUT*) result: ARRAY OF CHAR);
+
+    (* Puts the current date and time into result according to the      *)
+    (* given format specification.  The format codes are:               *)
+    (*                                                                  *)
+    (*      HH          hours                                           *)
+    (*      MM          minutes                                         *)
+    (*      SS          seconds                                         *)
+    (*      AM          implies 12-hour clock, replaced by PM if needed *)
+    (*      PM          implies 12-hour clock, replaced by AM if needed *)
+    (*                                                                  *)
+    (*      dd          day, numeric                                    *)
+    (*      ddd         day, three-letter name                          *)
+    (*      mm          month, numeric                                  *)
+    (*      mmm         month, three-letter name                        *)
+    (*      yy          year, including Y2K bug                         *)
+    (*      yyyy        year, all four digits                           *)
+    (*                                                                  *)
+    (*      zz          first time: sign and hours of time zone         *)
+    (*      zz          second time: minutes part of time zone          *)
+    (*                                                                  *)
+    (* Note: in some languages the day name and/or month name could be  *)
+    (* more than three characters long.                                 *)
+
+END DTFormat.
+

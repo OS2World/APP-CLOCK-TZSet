@@ -1,0 +1,20 @@
+DEFINITION MODULE MainDlg;
+
+        (************************************************************)
+        (*                                                          *)
+        (*                      NuClock utility                     *)
+        (*             The settings notebook and its frame          *)
+        (*                                                          *)
+        (*    Started:        10 August 2020                        *)
+        (*    Last edited:    12 September 2020                     *)
+        (*    Status:         OK                                    *)
+        (*                                                          *)
+        (************************************************************)
+
+
+PROCEDURE OpenMainDlg;
+
+    (* Creates the main dialogue box. *)
+
+END MainDlg.
+

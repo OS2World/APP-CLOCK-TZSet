@@ -1,0 +1,58 @@
+DEFINITION MODULE DateTime;
+
+        (********************************************************)
+        (*                                                      *)
+        (*       Manipulation of dates and times in order to    *)
+        (*            deal with summer time adjustments.        *)
+        (*                                                      *)
+        (*  Programmer:         P. Moylan                       *)
+        (*  Started:            31 December 2018                *)
+        (*  Last edited:        5 September 2020                *)
+        (*  Status:             OK                              *)
+        (*                                                      *)
+        (********************************************************)
+
+
+FROM OS2 IMPORT (* type*) DATETIME;
+
+FROM InternalDT IMPORT (*type*) IDateTime;
+
+TYPE
+    (* Encoded versions of some of the TZ parameters.  The values are   *)
+    (*  0   month                                                       *)
+    (*  1   week within month, where negative values mean counting back *)
+    (*      from the end of the month.                                  *)
+    (*  2   day of week, or day of month if value[1]=0.                 *)
+    (*  3   seconds after midnight.                                     *)
+
+    (* A variable of type RawDataType specifies a date/time when summer *)
+    (* time starts or ends.                                             *)
+
+    RawDataType = ARRAY [0..3] OF INTEGER;
+
+    RawInfoType = POINTER TO RawInfoRecord;
+
+    RawInfoRecord = RECORD
+                        valid: BOOLEAN;
+                        errpos: CARDINAL;
+                        StartRaw, EndRaw: RawDataType;
+                        BaseZone, correction: INTEGER;
+                    END (* RECORD *);
+
+    CookedInfoType = POINTER TO CookedInfoRecord;
+
+    CookedInfoRecord = RECORD
+                            SummerStart, SummerEnd: IDateTime;
+                            NoSummerTime, InSummerTime: BOOLEAN;
+                       END (* RECORD *);
+
+PROCEDURE FindSummerStartAndEnd (p: RawInfoType;  VAR (*INOUT*) info: CookedInfoType;
+                                  VAR (*OUT*) DTSummerStart, DTSummerEnd: DATETIME;
+                                    VAR (*OUT*) zone: INTEGER);
+
+    (* Sets the values of the variables that define the summer start    *)
+    (* and end date.  The output value zone is the current time zone,   *)
+    (* which is not necessarily the same as the base zone in p^.        *)
+
+END DateTime.
+

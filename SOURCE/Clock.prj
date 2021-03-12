@@ -1,0 +1,27 @@
+- USEDLL+
+- GENDLL -
+- IMPLIB -
+
+- GENDEBUG +
+- LINENO +
+- GENHISTORY +
+- FATFS -
+
++pm
++m2extensions
+-multithread+
+
+-link    = "xlink /MAP @%s",mkfname#mkfext;
+
+-TRACKTNIUSAGE:-
+-WATCHTEST:-
+-EXCEPTQ:+
+
+-INCL_BASE:+
+-INCL_PM:+
+-INCL_DOSDEVIOCTL:+
+
+!module Clock.mod
+!module INIData.dll
+!module DID.res
+

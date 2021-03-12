@@ -1,0 +1,26 @@
+DEFINITION MODULE About;
+
+        (****************************************************************)
+        (*                                                              *)
+        (*                        NuClock utility                       *)
+        (*                     The 'about' dialogue                     *)
+        (*                                                              *)
+        (*    Started:        11 August 2020                            *)
+        (*    Last edited:    20 September 2020                         *)
+        (*    Status:         OK                                        *)
+        (*                                                              *)
+        (****************************************************************)
+
+
+IMPORT OS2, CommonSettings, Languages;
+
+PROCEDURE Create (owner: OS2.HWND;  VAR (*OUT*) PageID: CARDINAL);
+
+    (* Creates the dialogue box. *)
+
+PROCEDURE SetLanguage (lang: Languages.LangHandle);
+
+    (* Relabels this page in the new language. *)
+
+END About.
+

@@ -1,0 +1,73 @@
+DEFINITION MODULE CommonSettings;
+
+        (****************************************************************)
+        (*                                                              *)
+        (*                        NuClock utility                       *)
+        (*                 Data common to several modules               *)
+        (*                                                              *)
+        (*    Started:        10 August 2020                            *)
+        (*    Last edited:    22 September 2020                         *)
+        (*    Status:         OK                                        *)
+        (*                                                              *)
+        (****************************************************************)
+
+
+FROM OS2 IMPORT WM_USER, HWND;
+FROM Languages IMPORT LangHandle;
+
+CONST
+    FONTCHANGED = WM_USER + 1;  (* now unused *)
+    LANGCHANGED = WM_USER + 2;
+    TIMECHANGED = WM_USER + 3;
+    NEWTICK     = WM_USER + 4;
+    ADJUSTCLOCK = WM_USER + 5;
+
+    FontNameSize = 256;
+
+TYPE
+    FontName = ARRAY [0..FontNameSize-1] OF CHAR;
+    FontGroup = (MainDlg, BigFont, EditDlg);
+
+VAR DayName: ARRAY [0..6] OF ARRAY [0..7] OF CHAR;
+    MonthName: ARRAY [1..12] OF ARRAY [0..7] OF CHAR;
+
+
+
+PROCEDURE SetInitialWindowPosition (hwnd: HWND;  group: FontGroup);
+
+    (* If this window has a previously stored position in our INI file, *)
+    (* positions the window to that position.                           *)
+
+PROCEDURE StoreWindowPosition (hwnd: HWND;  group: FontGroup);
+
+    (* Saves the location of this window in our INI file. *)
+
+PROCEDURE AddToGroup (group: FontGroup;  hwnd: HWND;  ID: CARDINAL);
+
+    (* Declares a window to belong to this group.  If ID=0 then hwnd    *)
+    (* is the window.  Otherwise, ID identifies a subwindow of hwnd.    *)
+
+PROCEDURE SetFontsForGroup (group: FontGroup);
+
+    (* Sets the font for all windows in this group.  This might be      *)
+    (* overkill, but it's the simplest solution until such time as I've *)
+    (* solved the font inheritance problem.                             *)
+
+PROCEDURE UpdateFontFrom (hwnd: HWND;  group: FontGroup);
+
+    (* Takes the font setting from window hwnd and propagates it to the *)
+    (* entire group.  Note that this will often be a "no operation"     *)
+    (* because the font is no different from the presently active one.  *)
+
+PROCEDURE ChangeLanguageTo (name: ARRAY OF CHAR): BOOLEAN;
+
+    (* Changes the current language setting, but only if a suitable     *)
+    (* NuClock.name.lng file exists.  Returns FALSE if no change.       *)
+
+PROCEDURE CurrentLanguage (VAR (*OUT*) lang: LangHandle;
+                                VAR (*OUT*) name: ARRAY OF CHAR);
+
+    (* Returns the current language setting. *)
+
+END CommonSettings.
+

@@ -1,0 +1,78 @@
+(**************************************************************************)
+(*                                                                        *)
+(*  NuClock utility                                                       *)
+(*  Copyright (C) 2020   Peter Moylan                                     *)
+(*                                                                        *)
+(*  This program is free software: you can redistribute it and/or modify  *)
+(*  it under the terms of the GNU General Public License as published by  *)
+(*  the Free Software Foundation, either version 3 of the License, or     *)
+(*  (at your option) any later version.                                   *)
+(*                                                                        *)
+(*  This program is distributed in the hope that it will be useful,       *)
+(*  but WITHOUT ANY WARRANTY; without even the implied warranty of        *)
+(*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *)
+(*  GNU General Public License for more details.                          *)
+(*                                                                        *)
+(*  You should have received a copy of the GNU General Public License     *)
+(*  along with this program.  If not, see <http://www.gnu.org/licenses/>. *)
+(*                                                                        *)
+(*  To contact author:   http://www.pmoylan.org   peter@pmoylan.org       *)
+(*                                                                        *)
+(**************************************************************************)
+
+DEFINITION MODULE InternalDT;
+
+        (****************************************************************)
+        (*                                                              *)
+        (*                         NuClock utility                      *)
+        (*                    Internal date/time format                 *)
+        (*                                                              *)
+        (*    Started:        30 August 2020                            *)
+        (*    Last edited:    22 September 2020                         *)
+        (*    Status:         OK                                        *)
+        (*                                                              *)
+        (****************************************************************)
+
+
+FROM OS2 IMPORT (*type*) DATETIME;
+
+TYPE
+    (* Our internal representation of dates and times. *)
+
+    DayOfWeek = [0..6];      (* Sunday = 0 *)
+
+    IDateTime = RECORD
+                    year, day, minute: CARDINAL;    (* day 0 is 1 Jan *)
+                    weekday: DayOfWeek;
+                END (*RECORD*);
+
+
+PROCEDURE SetDayOfWeek (VAR (*INOUT*) d: IDateTime);
+
+    (* Calculates d.weekday, on the assumption that d.year and d.day    *)
+    (* are already set correctly.                                       *)
+
+PROCEDURE DTtoIDT (dt: DATETIME): IDateTime;
+
+    (* Converts from the OS/2 representation to our internal representation. *)
+
+PROCEDURE IDTtoDT (idt: IDateTime): DATETIME;
+
+    (* Converts from our internal representation to the OS/2 representation. *)
+
+PROCEDURE AddMinutes (VAR (*INOUT*) idt: IDateTime;  extra: CARDINAL);
+
+    (* Adds extra to idt.  We assume extra < minutes per day. *)
+
+PROCEDURE SubtractMinutes (VAR (*INOUT*) idt: IDateTime;  adjust: CARDINAL);
+
+    (* Subtracts adjust from idt.  We assume adjust < minutes per day. *)
+
+PROCEDURE DiffMinutes (VAR (*IN*) from, to: IDateTime): INTEGER;
+
+    (* Returns (to - from), in minutes.  Assumption: the dates are      *)
+    (* either in the same year, or to is in the year after from.        *)
+
+END InternalDT.
+
+

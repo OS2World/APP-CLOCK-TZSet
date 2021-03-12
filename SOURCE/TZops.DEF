@@ -1,0 +1,58 @@
+(**************************************************************************)
+(*                                                                        *)
+(*  NuClock utility                                                       *)
+(*  Copyright (C) 2020   Peter Moylan                                     *)
+(*                                                                        *)
+(*  This program is free software: you can redistribute it and/or modify  *)
+(*  it under the terms of the GNU General Public License as published by  *)
+(*  the Free Software Foundation, either version 3 of the License, or     *)
+(*  (at your option) any later version.                                   *)
+(*                                                                        *)
+(*  This program is distributed in the hope that it will be useful,       *)
+(*  but WITHOUT ANY WARRANTY; without even the implied warranty of        *)
+(*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *)
+(*  GNU General Public License for more details.                          *)
+(*                                                                        *)
+(*  You should have received a copy of the GNU General Public License     *)
+(*  along with this program.  If not, see <http://www.gnu.org/licenses/>. *)
+(*                                                                        *)
+(*  To contact author:   http://www.pmoylan.org   peter@pmoylan.org       *)
+(*                                                                        *)
+(**************************************************************************)
+
+DEFINITION MODULE TZops;
+
+        (****************************************************************)
+        (*                                                              *)
+        (*                         NuClock utility                      *)
+        (*                     Working with TZ strings                  *)
+        (*                                                              *)
+        (*    Started:        22 August 2020                            *)
+        (*    Last edited:    31 August 2020                            *)
+        (*    Status:         OK                                        *)
+        (*                                                              *)
+        (****************************************************************)
+
+
+FROM DateTime IMPORT
+    (* type *)  RawInfoType, CookedInfoType;
+
+PROCEDURE UpdateTZinfo (TZstr: ARRAY OF CHAR;  VAR (*INOUT*) p: RawInfoType): BOOLEAN;
+
+    (* Extracts time zone parameters from TZstr.    *)
+    (* Returns TRUE iff TZstr is a valid TZ string. *)
+
+PROCEDURE GetZoneInfo (raw: RawInfoType;  VAR (*INOUT*) info: CookedInfoType;
+                            VAR (*OUT*) currentTZ: ARRAY OF CHAR;
+                            VAR (*OUT*) SummerStart, SummerEnd: ARRAY OF CHAR);
+
+    (* Translates the raw data to text strings. *)
+
+PROCEDURE TimeToNextChange (info: CookedInfoType;
+                                VAR (*OUT*) amount, unit: CARDINAL);
+
+    (* Calculates how many days/hours/minutes until next time zone change.  *)
+    (* unit = 0 for days, 1, for hours, 2 for minutes.                      *)
+
+END TZops.
+

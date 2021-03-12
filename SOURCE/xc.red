@@ -1,0 +1,24 @@
+xc.msg = $(XDSDIR)/bin
+xc.cfg = $!
+*.tem  = $(XDSDIR)/bin
+INIData.sym = D:/DevDLL/INIData/sym
+INIData.dll = D:/DevDLL/INIData
+%INIData.def = /dev1/general/def/INIOld
+%INIData.mod = /dev1/general/src/INIOld
+*.lib  = d:/os2tk45/lib;../inet/lib;$(XDSDIR)/lib/x86
+*.sym  = sym;$(XDSDIR)/sym/x86
+*.def  = def;../inet/def; ../crypt/def; ../general/def; /pmos2/def
+*.mod  = src;../inet/src; ../crypt/src; ../general/src; /pmos2/src/vio;/pmos2/src
+*.ob2  = .
+*.prj  = .
+*.obj  = obj
+*.rsp  = .
+*.mkf  = .
+*.res  = .
+changes.txt = doc
+*.doc  = doc
+*.ipf  = doc
+*.txt  = doc
+*.cmd  = filters;tools
+*.res  = res
+

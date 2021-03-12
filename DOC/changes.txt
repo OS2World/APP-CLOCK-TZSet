@@ -1,0 +1,32 @@
+CHANGE RECORD
+
+Version 1.0          ( 8 Oct 2020)
+    New version numbering sequence.
+    Major redesign to separate the user interface from
+       the daemon that waits for a time zone change
+       to happen.  (See manual.)
+
+Version 09
+   Fixed: crash when the TZ string contained a negative
+      "seconds after midnight" value.
+   Updated TZOnce to show the next time zone changes in
+      the future, rather than in the current year.
+   Tidied up source code to make it more readable.
+
+Version 08
+   Removed a duplicate "Summer time ends" message.
+
+Version 07
+   Changed the "US default rules" to reflect changes to the
+      summer time start and end dates for those states that
+      respect the federal standard.
+   Fixed: start/end dates for the following year were
+      incorrect.  Those dates were relevant for any case
+      where the summer is already over.
+   Display change: the screen output messages use more
+      human-friendly date formats than the internal format.
+   Display change: we don't display the minutes until the
+      next change unless it is really close.  Before that we
+      display hours or days, as appropriate.
+   Added an icon.
+

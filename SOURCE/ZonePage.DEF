@@ -1,0 +1,51 @@
+DEFINITION MODULE ZonePage;
+
+        (****************************************************************)
+        (*                                                              *)
+        (*                         NuClock utility                      *)
+        (*                 Time zone page of the notebook               *)
+        (*                                                              *)
+        (*    Started:        10 August 2020                            *)
+        (*    Last edited:    30 September 2020                         *)
+        (*    Status:         OK                                        *)
+        (*                                                              *)
+        (****************************************************************)
+
+
+IMPORT OS2, CommonSettings, Languages;
+FROM INIData IMPORT (*type*) HINI;
+
+
+PROCEDURE SetINIFileName (name: ARRAY OF CHAR);
+
+    (* Sets the INI file name. *)
+
+PROCEDURE CreatePage (notebook: OS2.HWND;
+                       VAR (*OUT*) PageID: CARDINAL): OS2.HWND;
+
+    (* Creates the time zone page and adds it to the notebook. *)
+
+PROCEDURE SetLanguage (lang: Languages.LangHandle);
+
+    (* Relabels this page in the new language. *)
+
+PROCEDURE TimeToNext;
+
+    (* Displays the time to next time zone change. *)
+
+PROCEDURE RecomputeTimeZone;
+
+    (* Called when there is a possibility that we have moved into or    *)
+    (* out of summer time.  Forces a display update if necessary.       *)
+
+PROCEDURE StoreData (hwnd: OS2.HWND): BOOLEAN;
+
+    (* Stores the values on page 1 back into the INI file.  Returns     *)
+    (* TRUE if checks for start/end of summer time will still be needed.*)
+
+PROCEDURE StoreRawData (hini: HINI);
+
+    (* Stores the data that TZmon will need. *)
+
+END ZonePage.
+

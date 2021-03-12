@@ -1,0 +1,47 @@
+DEFINITION MODULE ClockPage;
+
+        (****************************************************************)
+        (*                                                              *)
+        (*                         NuClock utility                      *)
+        (*                     Page 1 of the notebook                   *)
+        (*                                                              *)
+        (*    Started:        10 August 2020                            *)
+        (*    Last edited:    22 September 2020                         *)
+        (*    Status:         OK                                        *)
+        (*                                                              *)
+        (****************************************************************)
+
+
+IMPORT OS2, CommonSettings, Languages;
+
+PROCEDURE SetINIFileName (name: ARRAY OF CHAR);
+
+    (* Sets the INI file name. *)
+
+PROCEDURE CreatePage (notebook: OS2.HWND;
+                       VAR (*OUT*) PageID: CARDINAL): OS2.HWND;
+
+    (* Creates the clock page and adds it to the notebook. *)
+
+PROCEDURE SetLanguage (lang: Languages.LangHandle);
+
+    (* Relabels this page in the new language. *)
+
+PROCEDURE SetWatch (level: CARDINAL);
+
+    (* Request, from the time zone page, to be notified, when there is   *)
+    (* an important change in date/time.  The values of level are:       *)
+    (*   0   only notify on the midnight switch to a new day             *)
+    (*   1   notify once per hour                                        *)
+    (*   2   notify once per minute                                      *)
+
+PROCEDURE AdjustClock (minutes: INTEGER);
+
+    (* Subtracts minutes from the current time. *)
+
+PROCEDURE StoreData (hwnd: OS2.HWND);
+
+    (* Stores the values on page 1 back into the INI file.  *)
+
+END ClockPage.
+

@@ -1,0 +1,51 @@
+(**************************************************************************)
+(*                                                                        *)
+(*  NuClock utility - dialogue to edit date/time                          *)
+(*  Copyright (C) 2020   Peter Moylan                                     *)
+(*                                                                        *)
+(*  This program is free software: you can redistribute it and/or modify  *)
+(*  it under the terms of the GNU General Public License as published by  *)
+(*  the Free Software Foundation, either version 3 of the License, or     *)
+(*  (at your option) any later version.                                   *)
+(*                                                                        *)
+(*  This program is distributed in the hope that it will be useful,       *)
+(*  but WITHOUT ANY WARRANTY; without even the implied warranty of        *)
+(*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *)
+(*  GNU General Public License for more details.                          *)
+(*                                                                        *)
+(*  You should have received a copy of the GNU General Public License     *)
+(*  along with this program.  If not, see <http://www.gnu.org/licenses/>. *)
+(*                                                                        *)
+(*  To contact author:   http://www.pmoylan.org   peter@pmoylan.org       *)
+(*                                                                        *)
+(**************************************************************************)
+
+DEFINITION MODULE EditDlg;
+
+        (************************************************************)
+        (*                                                          *)
+        (*              NuClock clock setting utility               *)
+        (*             Dialogue to edit a date and time             *)
+        (*                                                          *)
+        (*    Started:        1 September 2020                      *)
+        (*    Last edited:    4 September 2020                      *)
+        (*    Status:         OK                                    *)
+        (*                                                          *)
+        (************************************************************)
+
+
+IMPORT OS2;
+
+FROM Languages IMPORT LangHandle;
+
+
+PROCEDURE SetININame (name: ARRAY OF CHAR);
+
+    (* Sets the name of the INI file. *)
+
+PROCEDURE Edit (owner: OS2.HWND;  lang: LangHandle;  dateformat: ARRAY OF CHAR);
+
+    (* Allows the user to modify date and time.  *)
+
+END EditDlg.
+

@@ -1,0 +1,18 @@
+DEFINITION MODULE NCV;
+
+        (****************************************************************)
+        (*                                                              *)
+        (*                      TZSet version number                    *)
+        (*                                                              *)
+        (*    Started:        10 August 2020                            *)
+        (*    Last edited:    6 October 2020                            *)
+        (*    Status:         OK                                        *)
+        (*                                                              *)
+        (****************************************************************)
+
+
+CONST
+    version = "1.0";
+
+END NCV.
+
